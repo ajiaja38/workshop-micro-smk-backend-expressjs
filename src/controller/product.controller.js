@@ -18,14 +18,6 @@ const createProductHandler = async (req, res) => {
   try {
     const body = req.body
 
-    try {
-      productSchema.parse(body)
-    } catch (error) {
-      const zodError = JSON.parse(error.message)
-      console.log(zodError)
-      throw new BadRequestException(zodError[0].message)
-    }
-
     res.status(201).json({
       code: 201,
       message: "Product created successfully",
