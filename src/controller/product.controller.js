@@ -6,6 +6,7 @@ const {
   findAllProductsService,
   updateProductByIdService,
   deletedProductByIdService,
+  findAllProductPaginationService,
 } = require("../service/product.service")
 const productSchema = require("../validation/productPayload")
 
@@ -49,6 +50,36 @@ const findAllProductHandler = async (req, res) => {
       code: 200,
       message: "Product found successfully",
       data: await findAllProductsService(),
+    })
+  } catch (error) {
+    res.status(500).json({ code: 500, message: error.message })
+  }
+}
+
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+const findAllProductPaginationHandler = async (req, res) => {
+  const page = parseInt(req.query.page) || 1
+  const limit = parseInt(req.query.limit) || 10
+
+  const { data, totalPage, totalData } = await findAllProductPaginationService(
+    page,
+    limit
+  )
+
+  try {
+    res.status(200).json({
+      code: 200,
+      message: "Product found successfully",
+      data,
+      meta: {
+        page,
+        limit,
+        totalPage,
+        totalData,
+      },
     })
   } catch (error) {
     res.status(500).json({ code: 500, message: error.message })
@@ -124,6 +155,7 @@ const deleteProductByIdHandler = async (req, res) => {
 module.exports = {
   createProductHandler,
   findAllProductHandler,
+  findAllProductPaginationHandler,
   findProductByIdHandler,
   updateProductByIdHandler,
   deleteProductByIdHandler,

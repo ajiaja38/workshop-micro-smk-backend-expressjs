@@ -1,7 +1,7 @@
 const express = require("express")
 const morgan = require("morgan")
-const logger = require("./src/helper/logger")
 const mongoConnection = require("./src/config/db")
+const logger = require("./src/helper/logger")
 const router = require("./src/router")
 
 const app = express()

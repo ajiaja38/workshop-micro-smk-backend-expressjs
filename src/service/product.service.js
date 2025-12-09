@@ -10,8 +10,20 @@ const createProductService = async (data) => {
   return product
 }
 
-const findAllProductsService = async () => {
-  return await Product.find()
+const findAllProductsService = async () => await Product.find()
+
+const findAllProductPaginationService = async (page, limit) => {
+  const skip = (page - 1) * limit
+
+  const totalData = await Product.countDocuments()
+  const totalPage = Math.ceil(totalData / limit)
+  const data = await Product.find().skip(skip).limit(limit)
+
+  return {
+    data,
+    totalPage,
+    totalData,
+  }
 }
 
 const findProductByIdService = async (_id) => {
@@ -40,8 +52,9 @@ const deletedProductByIdService = async (_id) => {
 
 module.exports = {
   createProductService,
-  findProductByIdService,
   findAllProductsService,
+  findAllProductPaginationService,
+  findProductByIdService,
   updateProductByIdService,
   deletedProductByIdService,
 }
