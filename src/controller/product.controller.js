@@ -8,7 +8,6 @@ const {
   deletedProductByIdService,
   findAllProductPaginationService,
 } = require("../service/product.service")
-const productSchema = require("../validation/productPayload")
 
 /**
  * @param {import('express').Request} req
