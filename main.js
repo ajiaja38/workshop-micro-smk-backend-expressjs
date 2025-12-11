@@ -25,5 +25,5 @@ app.get(prefix, (req, res) => {
 app.use(`${prefix}`, router)
 
 app.listen(port, () => {
-  logger.info(`App listening on http://localhost:${port}${prefix}`)
+  logger.info(`App Workshop listening on http://localhost:${port}${prefix}`)
 })
