@@ -27,5 +27,5 @@ app.use(`${prefix}`, router)
 app.use(globalExceptionMiddleware)
 
 app.listen(port, () => {
-  logger.info(`App Workshop listening on http://localhost:${port}${prefix}`)
+  logger.info(`🚀 Workshop listening on http://localhost:${port}${prefix}`)
 })
